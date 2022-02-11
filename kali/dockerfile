@@ -1,0 +1,46 @@
+#syntax=docker/dockerfile:1
+FROM kalilinux/kali-rolling
+
+# Update and apt install tools
+RUN apt update && apt -y install kali-linux-core
+RUN apt dist-upgrade -y
+RUN apt autoremove
+RUN apt clean
+RUN apt install -y \
+metasploit-framework \
+nmap \
+sqlmap \
+john \
+exploitdb \
+git \
+seclists \
+curl \
+enum4linux \
+feroxbuster \
+impacket-scripts \
+nbtscan \
+nikto \
+onesixtyone \
+oscanner \
+redis-tools \
+smbclient \
+smbmap \
+snmp \
+sslscan \
+sipvicious \
+tnscmd10g \
+whatweb \
+python3-pip \
+vim 
+
+# Create known_hosts for git cloning
+RUN mkdir /.ssh
+RUN touch /.ssh/known_hosts
+# Add host keys
+RUN ssh-keyscan github.com >> /.ssh/known_hosts
+RUN ssh-keyscan bitbucket.org >> /.ssh/known_hosts
+
+# Clone git repos
+RUN mkdir /repos
+RUN git clone https://github.com/aboul3la/Sublist3r.git /repos/Sublist3r
+RUN pip install -r /repos/Sublist3r/requirements.txt
