@@ -24,12 +24,16 @@ resource "aws_instance" "pt_lab" {
     Name = "PT Lab Instance"
   }
 
+root_block_device {
+  volume_type = "gp2"
+  volume_size = 30
+}
+
   user_data = <<-EOF
     #!/bin/bash
     # clone lab repo and setup filesystem
-    cd /home/$(whoami)
-    git clone https://github.com/tonyarris/lab
-    cd lab
+    git clone https://github.com/tonyarris/lab /home/$(whoami)/lab
+    cd /home/$(whoami)/lab
     cp stop.sh kali
     cp stop.sh parrot
     rm stop.sh
@@ -37,6 +41,7 @@ resource "aws_instance" "pt_lab" {
 
     # install docker
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y install docker.io
 
     # build containers
