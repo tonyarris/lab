@@ -32,25 +32,26 @@ root_block_device {
   user_data = <<-EOF
     #!/bin/bash
     # clone lab repo and setup filesystem
-    git clone https://github.com/tonyarris/lab /home/$(whoami)/lab
-    cd /home/$(whoami)/lab
+    sudo su
+    git clone https://github.com/tonyarris/lab /home/ubuntu/lab
+    cd /home/ubuntu/lab
     cp stop.sh kali
     cp stop.sh parrot
     rm stop.sh
     rm -r terraform/
 
     # install docker
-    sudo apt-get -y update
-    sudo apt-get -y upgrade
-    sudo apt-get -y install docker.io
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y install docker.io
 
     # build containers
     cd kali
-    sudo chmod +x *.sh
-    sudo ./build.sh
+    chmod +x *.sh
+    ./build.sh
     cd ../parrot
-    sudo chmod +x *.sh
-    sudo ./build.sh
+    chmod +x *.sh
+    ./build.sh
     
   EOF
 }
