@@ -32,7 +32,8 @@ tnscmd10g \
 whatweb \
 python3-pip \
 vim \
-gospider 
+gospider \
+golang-go
 
 # Create known_hosts for git cloning
 RUN mkdir /.ssh
@@ -45,3 +46,10 @@ RUN ssh-keyscan bitbucket.org >> /.ssh/known_hosts
 RUN mkdir /repos
 RUN git clone https://github.com/aboul3la/Sublist3r.git /repos/Sublist3r
 RUN pip install -r /repos/Sublist3r/requirements.txt
+RUN git clone https://github.com/tomnomnom/gf
+
+# unfurl
+cd /tmp
+wget https://github.com/tomnomnom/unfurl/releases/download/v0.0.1/unfurl-linux-amd64-0.0.1.tgz
+tar xzf unfurl-linux-amd64-0.0.1.tgz
+sudo mv unfurl /usr/bin/
