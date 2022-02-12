@@ -31,7 +31,8 @@ sipvicious \
 tnscmd10g \
 whatweb \
 python3-pip \
-vim 
+vim \
+gospider 
 
 # Create known_hosts for git cloning
 RUN mkdir /.ssh
