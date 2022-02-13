@@ -53,3 +53,6 @@ cd /tmp
 wget https://github.com/tomnomnom/unfurl/releases/download/v0.0.1/unfurl-linux-amd64-0.0.1.tgz
 tar xzf unfurl-linux-amd64-0.0.1.tgz
 sudo mv unfurl /usr/bin/
+
+# getallurls
+go install github.com/lc/gau/v2/cmd/gau@latest

@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "pt_lab" {
-  ami           = "ami-0f8ce9c417115413d"
+  ami           = "ami-0257e70b7c6db1498"
   instance_type = "t3.micro"
   associate_public_ip_address = true
   key_name         = "ssh-key"
