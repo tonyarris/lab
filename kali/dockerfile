@@ -49,7 +49,7 @@ RUN pip install -r /repos/Sublist3r/requirements.txt
 RUN git clone https://github.com/tomnomnom/gf
 
 # unfurl
-cd /tmp
+RUN cd /tmp
 RUN wget https://github.com/tomnomnom/unfurl/releases/download/v0.0.1/unfurl-linux-amd64-0.0.1.tgz
 RUN tar xzf unfurl-linux-amd64-0.0.1.tgz
 RUN sudo mv unfurl /usr/bin/
