@@ -53,6 +53,12 @@ root_block_device {
     chmod +x *.sh
     ./build.sh
     
+    # set aliases
+    cd /home/ubuntu
+    echo "alias kali=\"sh /home/ubuntu/lab/kali/run.sh\"" >> .bashrc
+    echo "alias parrot=\"sh /home/ubuntu/lab/parrot/run.sh\"" >> .bashrc
+    echo "alias stop=\"sh /home/ubuntu/lab/parrot/stop.sh\"" >> .bashrc
+    
   EOF
 }
 
