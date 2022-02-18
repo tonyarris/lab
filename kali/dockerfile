@@ -33,7 +33,8 @@ whatweb \
 python3-pip \
 vim \
 gospider \
-golang-go
+golang-go \
+ffuf
 
 # Create known_hosts for git cloning
 RUN mkdir /.ssh
