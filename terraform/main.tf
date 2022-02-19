@@ -19,9 +19,10 @@ resource "aws_instance" "pt_lab" {
   instance_type = "t3.micro"
   associate_public_ip_address = true
   key_name         = "ssh-key"
+  count = var.instance_count
 
   tags = {
-    Name = "PT Lab Instance"
+    Name = "PT Lab Instance ${count.index + 1}"
   }
 
 root_block_device {
@@ -62,9 +63,13 @@ root_block_device {
   EOF
 }
 
+variable "instance_count" {
+  default = "2"
+}
+
 output "instance_ip" {
   description = "The public ip for ssh access"
-  value       = aws_instance.pt_lab.public_ip
+  value       = aws_instance.pt_lab[*].public_ip
 }
 
 resource "aws_key_pair" "ssh-key" {
