@@ -58,3 +58,6 @@ RUN rm unfurl-linux-amd64-0.0.1.tgz
 
 # getallurls
 RUN apt install getallurls
+
+# waybackpack
+RUN pip install waybackpack
