@@ -15,13 +15,14 @@ provider "aws" {
 }
 
 resource "aws_instance" "pt_lab" {
-  ami           = "ami-0257e70b7c6db1498"
+  ami           = "ami-0f8ce9c417115413d"
   instance_type = "t3.micro"
   associate_public_ip_address = true
   key_name         = "ssh-key"
+  count = var.instance_count
 
   tags = {
-    Name = "PT Lab Instance"
+    Name = "PT Lab Instance ${count.index + 1}"
   }
 
 root_block_device {
@@ -53,12 +54,22 @@ root_block_device {
     chmod +x *.sh
     ./build.sh
     
+    # set aliases
+    cd /home/ubuntu
+    echo "alias kali=\"sh /home/ubuntu/lab/kali/run.sh\"" >> .bashrc
+    echo "alias parrot=\"sh /home/ubuntu/lab/parrot/run.sh\"" >> .bashrc
+    echo "alias stop=\"sh /home/ubuntu/lab/parrot/stop.sh\"" >> .bashrc
+    
   EOF
+}
+
+variable "instance_count" {
+  default = "3"
 }
 
 output "instance_ip" {
   description = "The public ip for ssh access"
-  value       = aws_instance.pt_lab.public_ip
+  value       = aws_instance.pt_lab[*].public_ip
 }
 
 resource "aws_key_pair" "ssh-key" {

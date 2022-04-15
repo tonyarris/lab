@@ -33,7 +33,8 @@ whatweb \
 python3-pip \
 vim \
 gospider \
-golang-go
+golang-go \
+ffuf
 
 # Create known_hosts for git cloning
 RUN mkdir /.ssh
@@ -54,6 +55,10 @@ RUN cd /tmp
 RUN wget https://github.com/tomnomnom/unfurl/releases/download/v0.0.1/unfurl-linux-amd64-0.0.1.tgz
 RUN tar xzf unfurl-linux-amd64-0.0.1.tgz
 RUN sudo mv unfurl /usr/bin/
+RUN rm unfurl-linux-amd64-0.0.1.tgz
 
 # getallurls
-RUN go install github.com/lc/gau/v2/cmd/gau@latest
+RUN apt install getallurls
+
+# waybackpack
+RUN pip install waybackpack
